@@ -1,0 +1,109 @@
+<?php
+/**
+ * @var array $reviews
+ * @var array $pagination
+ * @var string $errorMessage
+ */
+?>
+
+<div class="wrapper">
+    <form id="form-review">
+        <noscript class="noscript">Чтобы добавить отзыв Вам нужно включить JavaScript!</noscript>
+        <h1>Оставить отзыв</h1>
+
+        <div class="box">
+            <label for="name">Ф.И.О. *</label>
+            <input id="name" type="text" name="name" placeholder="Name">
+        </div>
+
+        <div class="box">
+            <label for="theme">Тема *</label>
+            <select id="theme" name="theme">
+                <option value="" selected hidden disabled>Выберите тему</option>
+                <option value="thanks">Благодарность</option>
+                <option value="proposal">Предложение по улучшению сервиса</option>
+                <option value="complaint">Жалоба</option>
+            </select>
+        </div>
+
+        <div class="box">
+            <label for="text">Отзыв *</label>
+            <textarea id="text" name="text"></textarea>
+        </div>
+
+        <div id="file-box">
+            <span>Фото:</span>
+            <input id="image" type="file" name="image" accept="image/jpeg,image/png">
+            <label for="image">Выбрать</label>
+        </div>
+
+        <button type="submit" name="send">Отправить</button>
+    </form>
+
+    <div id="wrapper-review">
+        <noscript>Чтобы посмотреть отзывы Вам нужно включить JavaScript!</noscript>
+        <h2>Отзывы:</h2>
+        <span>(<?= $pagination['totalRows'] ?? 0 ?>)</span>
+        <?php if (!empty($reviews)): ?>
+            <?php foreach ($reviews as $review): ?>
+                <div class="box-review">
+                    <div class="content">
+                        <div class="header">
+                            <span><?= $review['username']; ?></span>
+                            <span><?= $review['date']; ?></span>
+                        </div>
+                        <div class="text">
+                            <figure>
+                                <img src="../public/uploaded_images/<?= $review['image_name'] ?? 'default_user.jpg' ?>" alt="Foto" width="96">
+                            </figure>
+                            <div>
+                                <h3><?= $review['theme']; ?>:</h3>
+                                <p><?= $review['text']; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="like-box">
+                        <div>
+                            <span>Был ли вам полезен отзыв?</span>
+                        </div>
+                        <!-- <div class="like" onclick="handleLike(<?= $review['review_id']; ?>, this)"> -->
+                        <div class="like">
+                            <span>Да </span>
+                            <span><?= $review['like']; ?></span>
+                        </div>
+                        <!-- <div class="dislike" onclick="handleDislike(<?= $review['review_id']; ?>, this)"> -->
+                        <div class="dislike">
+                            <span>Нет </span>
+                            <span><?= $review['dislike']; ?></span>
+                        </div>
+                        <span hidden><?= $review['review_id']; ?></span>
+                    </div>
+                </div>
+            <?php endforeach;
+        elseif (isset($errorMessage)): ?>
+            <p class="review-error"><?= $errorMessage; ?></p>
+        <?php else: ?>
+            <p>Нет отзывов на данный момент.</p>
+        <?php endif;?>
+    </div>
+
+    <?php if (isset($pagination['paginatedPages'])): ?>
+        <div id="wrapper-pagination">
+
+            <ul id="num-rows">
+                <li>Отзывов на странице:</li><li class="focus-in">7</li><li>14</li><li>21</li><li>70</li>
+            </ul>
+
+            <ul id="pagination">
+                <!-- Тэг li не закрыт для избежания пробелов -->
+                <li id="previous" class="disable-arrow">&laquo;
+                <!-- Первый номер страницы по умолчанию в фокусе -->
+                <li class="page-focus">1
+                <?php for ($i = 2; $i <= $pagination['paginatedPages']; $i++): ?>
+                    <li><?= $i; ?>
+                <?php endfor; ?>
+                <li id="next">&raquo;
+            </ul>
+        </div>
+    <?php endif; ?>
+</div>

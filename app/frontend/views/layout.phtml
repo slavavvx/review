@@ -1,0 +1,28 @@
+<?php
+/**
+ *
+ * @template: Main layout
+ * @usage: This view file will be shown for every controller or action executed within the application
+ *
+ * @var string $title
+ * @var string $style
+ * @var string $script
+ * @var string $main
+ */
+?>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?= isset($title) ? $title : 'Review' ?></title>
+	<?= $this->renderTemplate('parts/icons') ?>
+	<?= isset($style) ? $this->renderTemplate($style) : '' ?>
+	<?= isset($script) ? $this->renderTemplate($script) : '' ?>
+</head>
+<body>
+<?= isset($main) ? $this->renderTemplate($main) : '' ?>
+</body>
+</html>
