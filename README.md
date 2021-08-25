@@ -1,4 +1,4 @@
-# Review
+# Review form
 
 This project was created by:
 	- PHP v.7.3.6
@@ -27,18 +27,19 @@ This project was created by:
 	- you can use web server Apache 2.4
 * Create virtual host ```review```
 	- add this row ```127.0.0.1 review``` into your hosts file (Windows: ```C:\Windows\System32\drivers\etc\hosts``` )
-	- copy and paste next code into httpd-vhosts.conf file (when using Apache: ```apache/conf/extra/```) with ```your_path``` to dir ```review```
-		<VirtualHost review:80>
-		    ServerName review
-		    DocumentRoot "your_path to dir review"
-
-		    ErrorLog "your_path/review/logs/error.log"
-		    CustomLog "your_path/review/logs/access.log" common
-		</VirtualHost>
+	- copy and paste next code into httpd-vhosts.conf file (when using Apache: ```apache/conf/extra/```) with ```your_path``` to dir ```review```:
+	-
+		```<VirtualHost review:80>```
+		    ```ServerName review```
+		    ```DocumentRoot your_path/review```
+		    ```ErrorLog "your_path/review/logs/error.log"```
+		    ```CustomLog "your_path/review/logs/access.log" common```
+		```</VirtualHost>```
 
 * Restart Apache
 
 ## Notice
 
 ## Useful commands
+
 
